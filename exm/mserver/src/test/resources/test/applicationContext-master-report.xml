@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="reportLogoImage" class="org.springframework.core.io.ClassPathResource">
+        <constructor-arg index="0" value="/com.bitzware.exm/report/nifc_logo_pl.png" />
+    </bean>
+    
+    <bean id="eventsOnStationReportSource" class="com.bitzware.exm.model.report.ReportSource">
+        <constructor-arg index="0" value="classpath:/com.bitzware.exm/report/normal/eventsOnStationReport.jrxml" />
+        <constructor-arg index="1" value="classpath:/com.bitzware.exm/report/plain/eventsOnStationReport.jrxml" />
+        <constructor-arg index="2" value="classpath:/com.bitzware.exm/report/spreadsheet/eventsOnStationReport.jrxml" />
+    </bean>
+    
+    <bean id="eventsInRoomReportSource" class="com.bitzware.exm.model.report.ReportSource">
+        <constructor-arg index="0" value="classpath:/com.bitzware.exm/report/normal/eventsInRoomReport.jrxml" />
+        <constructor-arg index="1" value="classpath:/com.bitzware.exm/report/plain/eventsInRoomReport.jrxml" />
+        <constructor-arg index="2" value="classpath:/com.bitzware.exm/report/spreadsheet/eventsInRoomReport.jrxml" />
+    </bean>
+    
+    <bean id="eventsOnFloorReportSource" class="com.bitzware.exm.model.report.ReportSource">
+        <constructor-arg index="0" value="classpath:/com.bitzware.exm/report/normal/eventsOnFloorReport.jrxml" />
+        <constructor-arg index="1" value="classpath:/com.bitzware.exm/report/plain/eventsOnFloorReport.jrxml" />
+        <constructor-arg index="2" value="classpath:/com.bitzware.exm/report/spreadsheet/eventsOnFloorReport.jrxml" />
+    </bean>
+    
+    <bean id="visitorsRoutesReportSource" class="com.bitzware.exm.model.report.ReportSource">
+        <constructor-arg index="0" value="classpath:/com.bitzware.exm/report/normal/visitorsRoutesReport.jrxml" />
+        <constructor-arg index="1" value="classpath:/com.bitzware.exm/report/plain/visitorsRoutesReport.jrxml" />
+        <constructor-arg index="2" value="classpath:/com.bitzware.exm/report/spreadsheet/visitorsRoutesReport.jrxml" />
+    </bean>
+    
+    <bean id="popularStationsReportSource" class="com.bitzware.exm.model.report.ReportSource">
+        <constructor-arg index="0" value="classpath:/com.bitzware.exm/report/normal/popularStationsReport.jrxml" />
+        <constructor-arg index="1" value="classpath:/com.bitzware.exm/report/plain/popularStationsReport.jrxml" />
+        <constructor-arg index="2" value="classpath:/com.bitzware.exm/report/spreadsheet/popularStationsReport.jrxml" />
+    </bean>
+    
+    <bean id="dailyVisitsReportSource" class="com.bitzware.exm.model.report.ReportSource">
+        <constructor-arg index="0" value="classpath:/com.bitzware.exm/report/normal/dailyVisitsReport.jrxml" />
+        <constructor-arg index="1" value="classpath:/com.bitzware.exm/report/plain/dailyVisitsReport.jrxml" />
+        <constructor-arg index="2" value="classpath:/com.bitzware.exm/report/spreadsheet/dailyVisitsReport.jrxml" />
+    </bean>
+    
+    <bean id="reportGenerator" abstract="true">
+        <property name="reportManager" ref="reportManager" />
+        
+        <property name="styleTemplateSource" value="classpath:/com.bitzware.exm/report/styles.jrtx" />
+        <property name="logoImageSource" ref="reportLogoImage" />
+    </bean>
+    
+    <bean
+        id="eventsOnStationReportGenerator"
+        parent="reportGenerator"
+        class="com.bitzware.exm.service.report.impl.EventsOnStationReportGenerator"
+        scope="prototype">
+        
+        <property name="reportSchemaSource" ref="eventsOnStationReportSource" />
+    </bean>
+    
+    <bean
+        id="eventsInRoomReportGenerator"
+        parent="reportGenerator"
+        class="com.bitzware.exm.service.report.impl.EventsInRoomReportGenerator"
+        scope="prototype">
+        
+        <property name="reportSchemaSource" ref="eventsInRoomReportSource" />
+    </bean>
+    
+    <bean
+        id="eventsOnFloorReportGenerator"
+        parent="reportGenerator"
+        class="com.bitzware.exm.service.report.impl.EventsOnFloorReportGenerator"
+        scope="prototype">
+        
+        <property name="reportSchemaSource" ref="eventsOnFloorReportSource" />
+    </bean>
+    
+    <bean
+        id="visitorsRoutesReportGenerator"
+        parent="reportGenerator"
+        class="com.bitzware.exm.service.report.impl.VisitorsRoutesReportGenerator"
+        scope="prototype">
+        
+        <property name="reportSchemaSource" ref="visitorsRoutesReportSource" />
+    </bean>
+    
+    <bean
+        id="popularStationsReportGenerator"
+        parent="reportGenerator"
+        class="com.bitzware.exm.service.report.impl.PopularStationsReportGenerator"
+        scope="prototype">
+        
+        <property name="reportSchemaSource" ref="popularStationsReportSource" />
+    </bean>
+    
+    <bean
+        id="dailyVisitsReportGenerator"
+        parent="reportGenerator"
+        class="com.bitzware.exm.service.report.impl.DailyVisitsReportGenerator"
+        scope="prototype">
+        
+        <property name="reportSchemaSource" ref="dailyVisitsReportSource" />
+    </bean>
+    
+</beans>

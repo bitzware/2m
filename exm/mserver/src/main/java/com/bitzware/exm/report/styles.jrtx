@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperTemplate
+  PUBLIC "-//JasperReports//DTD Template//EN"
+  "http://jasperreports.sourceforge.net/dtds/jaspertemplate.dtd">
+
+<jasperTemplate>
+
+    <style name="Base" fontName="Arial" pdfEncoding="UTF-8" />    
+    <style name="Normal" style="Base" isDefault="true" fontSize="10" />
+    <style name="Small" style="Base" fontSize="8" />
+    <style name="Italic" style="Normal" isItalic="true" />
+    <style name="Bold" style="Normal" isBold="true" />
+    <style name="DocHeaderName" style="Base" fontSize="12" isBold="true" />
+    <style name="DocHeaderValue" style="Base" fontSize="12" />
+    <style name="DocTitle" style="Base" fontSize="14" isBold="true" />
+    <style name="Header" style="Base" fontSize="10" isBold="true" />
+    
+</jasperTemplate>

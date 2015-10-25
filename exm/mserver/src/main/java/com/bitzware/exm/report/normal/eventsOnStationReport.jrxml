@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jasperReport 
+        xmlns="http://jasperreports.sourceforge.net/jasperreports"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+        name="EventsOnStationReport"
+        pageWidth="595" 
+        pageHeight="842" 
+        columnWidth="270" 
+        columnSpacing="15" 
+        leftMargin="20" 
+        rightMargin="20" 
+        topMargin="50" 
+        bottomMargin="50"
+        whenNoDataType="AllSectionsNoDetail"
+        isTitleNewPage="false"
+        isSummaryNewPage="false"
+        isIgnorePagination="false"
+        columnCount="2">
+        
+    <import value="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+    
+    <template class="java.io.InputStream">
+        $P{styleTemplateInput}
+    </template>
+    
+    <parameter name="styleTemplateInput" class="java.io.InputStream" />
+    <parameter name="timeFormat" class="com.bitzware.exm.util.TimeFormatter" />
+    <parameter name="textSource" class="com.bitzware.exm.util.TextSource" />
+    <parameter name="from" class="java.util.Date" />
+    <parameter name="to" class="java.util.Date" />
+    <parameter name="eventType" class="java.lang.String" />
+    
+    <field name="eventType" class="com.bitzware.exm.visitordb.model.EventType" />
+    <field name="station" class="com.bitzware.exm.visitordb.model.Station" />
+    <field name="timestamp" class="java.util.Date" />
+    
+    <variable name="stationId" class="java.lang.Long">
+    	<variableExpression>
+    		$F{station}.getId()
+    	</variableExpression>
+    </variable>
+    
+    <group name="stationGroup">
+    	<groupExpression>
+    		$V{stationId}
+    	</groupExpression>
+    	
+    	<groupHeader>
+    		<band height="20">
+    			<textField isBlankWhenNull="true">
+                	<reportElement x="10" y="0" width="250" height="20" style="Bold"/>
+                	<textElement textAlignment="Left"/>
+                	<textFieldExpression class="java.lang.String">
+                    	$F{station}.getName() +
+                    	" (" + $F{station}.getRoom().getName() + ")"
+                	</textFieldExpression>
+            	</textField>
+    		</band>
+    	</groupHeader>
+    </group>
+    
+    <title>
+        <band height="132">
+            <textField>
+                <reportElement x="400" y="0" width="155" height="16" style="Normal"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" />
+                <textFieldExpression>
+                    $P{timeFormat}.formatTimestamp(new java.util.Date())
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="16" width="350" height="20" style="DocTitle"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{textSource}.getText("text.report.eventsonstation.title")
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="41" width="150" height="16" style="DocHeaderName"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{textSource}.getText("text.report.eventsonstation.from")
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="160" y="41" width="405" height="16" style="DocHeaderValue"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{timeFormat}.formatDate($P{from})
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="57" width="150" height="16" style="DocHeaderName"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{textSource}.getText("text.report.eventsonstation.to")
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="160" y="57" width="405" height="16" style="DocHeaderValue"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{timeFormat}.formatDate($P{to})
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="73" width="150" height="16" style="DocHeaderName"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{textSource}.getText("text.report.eventsonstation.eventtype")
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="160" y="73" width="405" height="16" style="DocHeaderValue"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{eventType}
+                </textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement x="0" y="112" width="555" height="1" />
+                <graphicElement />
+            </rectangle>
+        </band>
+    </title>
+    
+    <columnHeader>
+        <band height="25">
+            <!--<rectangle>
+                <reportElement x="0" y="0" width="130" height="18" forecolor="#444444" backcolor="#444444"/>
+                <graphicElement/>
+            </rectangle>-->
+            <textField>
+                <reportElement mode="Opaque" x="0" y="0" width="130" height="25" style="Header"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{textSource}.getText("text.eventtype.title")
+                </textFieldExpression>
+            </textField>
+            <!--<rectangle>
+                <reportElement x="140" y="0" width="120" height="18" forecolor="#444444" backcolor="#444444"/>
+                <graphicElement/>
+            </rectangle>-->
+            <textField>
+                <reportElement mode="Opaque" x="130" y="0" width="130" height="25" style="Header"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{textSource}.getText("text.timestamp.title")
+                </textFieldExpression>
+            </textField>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="15">
+            <textField>
+                <reportElement x="0" y="0" width="130" height="15" style="Normal"/>
+                <textElement textAlignment="Left"/>
+                <textFieldExpression class="java.lang.String">
+                    $P{textSource}.getText("text.eventtype." + $F{eventType}.toString())
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="130" y="0" width="130" height="15" style="Normal"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression class="java.lang.String">
+                    $P{timeFormat}.formatTimestamp($F{timestamp})
+                </textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    
+</jasperReport>

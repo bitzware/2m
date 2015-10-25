@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+    
+	<!-- DAO classes -->
+    
+    <!-- bean name="actionDefinitionDao" class="com.bitzware.exm.dao.impl.ActionDefinitionDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean -->
+    
+    <bean name="configDao" class="com.bitzware.exm.dao.impl.ConfigDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean name="eventDao" class="com.bitzware.exm.dao.impl.EventDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean name="roomDao" class="com.bitzware.exm.dao.impl.RoomDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean name="serverPropertyDao" class="com.bitzware.exm.dao.impl.ServerPropertyDaoImpl">
+        <property name="configManager" ref="configManager" />
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean name="stationDao" class="com.bitzware.exm.dao.impl.StationDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean name="visitorDao" class="com.bitzware.exm.dao.impl.VisitorDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+ </beans>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jasperReport 
+        xmlns="http://jasperreports.sourceforge.net/jasperreports"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+        name="EventsInRoomReport"
+        pageWidth="750" 
+        pageHeight="842" 
+        columnWidth="270" 
+        columnSpacing="15" 
+        leftMargin="20" 
+        rightMargin="20" 
+        topMargin="50" 
+        bottomMargin="50"
+        whenNoDataType="AllSectionsNoDetail"
+        isTitleNewPage="false"
+        isSummaryNewPage="false"
+        isIgnorePagination="true"
+        columnCount="1">
+        
+    <import value="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+    
+    <template class="java.io.InputStream">
+        $P{styleTemplateInput}
+    </template>
+    
+    <parameter name="styleTemplateInput" class="java.io.InputStream" />
+<!--    <parameter name="logoImageInput" class="java.io.InputStream" />-->
+    <parameter name="timeFormat" class="com.bitzware.exm.util.TimeFormatter" />
+    <parameter name="textSource" class="com.bitzware.exm.util.TextSource" />
+    <parameter name="from" class="java.util.Date" />
+    <parameter name="to" class="java.util.Date" />
+    
+    <field name="eventType" class="com.bitzware.exm.visitordb.model.EventType" />
+    <field name="station" class="com.bitzware.exm.visitordb.model.Station" />
+    <field name="timestamp" class="java.util.Date" />
+    
+    <variable name="roomId" class="java.lang.Long">
+    	<variableExpression>
+    		$F{station}.getRoom().getId()
+    	</variableExpression>
+    </variable>
+    
+    <detail>
+        <band height="15">
+            <textField isStretchWithOverflow="true">
+                <reportElement x="0" y="0" width="130" height="15" style="Normal"/>
+                <textElement textAlignment="Left"/>
+                <textFieldExpression class="java.lang.String">
+                    $F{station}.getRoom().getName()
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="130" y="0" width="130" height="15" style="Normal"/>
+                <textElement textAlignment="Left"/>
+                <textFieldExpression class="java.lang.String">
+                    $P{textSource}.getText("text.eventtype." + $F{eventType}.toString())
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="260" y="0" width="130" height="15" style="Normal"/>
+                <textElement textAlignment="Left"/>
+                <textFieldExpression class="java.lang.String">
+                    $P{timeFormat}.formatTimestamp($F{timestamp})
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement x="390" y="0" width="260" height="15" style="Normal"/>
+                <textElement textAlignment="Left"/>
+                <textFieldExpression class="java.lang.String">
+                    $F{station}.getName()
+                </textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    
+</jasperReport>

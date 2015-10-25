@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="masterServerManager" class="com.bitzware.exm.service.impl.MasterServerManagerImpl">
+		<property name="roomDao" ref="roomDao" />
+		<property name="serverPropertyDao" ref="serverPropertyDao" />
+		<property name="stationDao" ref="stationDao" />
+	</bean>
+
+	<bean id="masterSynchronizationManager"
+		class="com.bitzware.exm.service.impl.MasterSynchronizationManagerImpl">
+		<property name="masterServerManager" ref="masterServerManager" />
+		<property name="eventDao" ref="eventDao" />
+		<property name="stationDao" ref="stationDao" />
+		<property name="visitorDao" ref="visitorDao" />
+	</bean>
+
+	<bean id="masterEventRegisterManager"
+		class="com.bitzware.exm.service.impl.MasterEventRegisterManagerImpl">
+		<property name="masterServerManager" ref="masterServerManager" />
+		<property name="eventDao" ref="eventDao" />
+		<property name="stationDao" ref="stationDao" />
+		<property name="visitorDao" ref="visitorDao" />
+	</bean>
+
+	<bean id="wakeOnLanManager" class="com.bitzware.exm.service.WakeOnLanManager"
+		init-method="init">
+		<property name="configManager" ref="configManager" />
+		<property name="roomDao" ref="roomDao" />
+	</bean>
+
+	<bean id="reportManager" class="com.bitzware.exm.service.impl.ReportManagerImpl">
+		<property name="reportDao" ref="reportDao" />
+		<property name="reportGeneratorDao" ref="reportGeneratorDao" />
+		<property name="roomDao" ref="roomDao" />
+		<property name="stationDao" ref="stationDao" />
+	</bean>
+
+	<bean id="masterDuplicateManager"
+		class="com.bitzware.exm.service.impl.MasterDuplicateManagerImpl"
+		init-method="init">
+
+		<property name="configManager" ref="configManager" />
+		<property name="serverPropertyDao" ref="serverPropertyDao" />
+		<property name="stationDao" ref="stationDao" />
+	</bean>
+
+	<bean id="museumOpenManager" class="com.bitzware.exm.service.impl.MuseumOpenManagerImpl"
+		init-method="init" destroy-method="destroy">
+
+		<property name="masterServerManager" ref="masterServerManager" />
+		<property name="wakeOnLanManager" ref="wakeOnLanManager" />
+
+		<property name="schedulerFactory" ref="schedulerFactory" />
+	</bean>
+	<bean id="crestronManager" class="com.bitzware.exm.service.CrestronManagerBean">
+	</bean>
+	<bean id="reportLanguageCodes" class="java.util.ArrayList">
+		<constructor-arg index="0">
+			<list>
+				<value>en</value>
+				<value>pl</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="reportTextSourceCache" class="com.bitzware.exm.util.TextSourceCache">
+		<constructor-arg index="0" value="com.bitzware.exm.report.text" />
+	</bean>
+
+	<!-- Struts actions -->
+
+	<bean name="/panel/masterMainMenu" class="com.bitzware.exm.action.panel.MasterMainMenuAction"
+		scope="prototype">
+	</bean>
+
+	<bean name="/panel/masterConfig" class="com.bitzware.exm.action.panel.MasterConfigAction"
+		scope="prototype">
+		<property name="masterServerManager" ref="masterServerManager" />
+	</bean>
+
+	<bean name="/panel/unconfiguredStations"
+		class="com.bitzware.exm.action.panel.UnconfiguredStationsAction"
+		scope="prototype">
+		<property name="configManager" ref="configManager" />
+		<property name="masterServerManager" ref="masterServerManager" />
+		<property name="wakeOnLanManager" ref="wakeOnLanManager" />
+	</bean>
+
+	<bean name="/panel/crestronDevices" class="com.bitzware.exm.action.panel.CrestronDevicesAction"
+		scope="prototype">
+		<property name="masterServerManager" ref="masterServerManager" />
+		<property name="crestronManager" ref="crestronManager" />
+	</bean>
+	<bean name="/panel/rooms" class="com.bitzware.exm.action.panel.RoomsAction"
+		scope="prototype">
+		<property name="configManager" ref="configManager" />
+		<property name="masterDuplicateManager" ref="masterDuplicateManager" />
+		<property name="masterServerManager" ref="masterServerManager" />
+		<property name="museumOpenManager" ref="museumOpenManager" />
+		<property name="wakeOnLanManager" ref="wakeOnLanManager" />
+		<property name="crestronManager" ref="crestronManager" />
+	</bean>
+	
+		<bean name="/panel/mrooms" class="com.bitzware.exm.action.panel.RoomsAction" scope="prototype">
+		<property name="configManager" ref="configManager" />
+		<property name="masterDuplicateManager" ref="masterDuplicateManager" />
+		<property name="masterServerManager" ref="masterServerManager" />
+		<property name="museumOpenManager" ref="museumOpenManager" />
+		<property name="wakeOnLanManager" ref="wakeOnLanManager" />
+		<property name="crestronManager" ref="crestronManager" />
+	</bean>
+
+	<bean name="/panel/roomsConfig" class="com.bitzware.exm.action.panel.RoomsConfigAction"
+		scope="prototype">
+		<property name="masterServerManager" ref="masterServerManager" />
+	</bean>
+
+	<bean name="/panel/isReportReady" class="com.bitzware.exm.action.panel.IsReportReadyAction"
+		scope="prototype">
+		<property name="reportManager" ref="reportManager" />
+	</bean>
+
+	<bean name="/panel/getReport" class="com.bitzware.exm.action.panel.GetReportAction"
+		scope="prototype">
+		<property name="reportManager" ref="reportManager" />
+	</bean>
+
+	<bean name="/panel/reports" class="com.bitzware.exm.action.panel.ReportsAction"
+		scope="prototype">
+	</bean>
+
+	<bean name="/panel/displayReports" class="com.bitzware.exm.action.panel.DisplayReportsAction"
+		scope="prototype">
+		<property name="reportManager" ref="reportManager" />
+		<property name="pageSize" value="5" />
+	</bean>
+
+	<bean name="/panel/reportBase" abstract="true">
+		<property name="checkReportInterval" value="3000" />
+		<property name="languageCodes" ref="reportLanguageCodes" />
+		<property name="masterServerManager" ref="masterServerManager" />
+		<property name="reportManager" ref="reportManager" />
+		<property name="textSourceCache" ref="reportTextSourceCache" />
+	</bean>
+
+	<bean name="/panel/eventsOnStationReport"
+		class="com.bitzware.exm.action.panel.report.EventsOnStationReportAction"
+		scope="prototype" parent="/panel/reportBase">
+	</bean>
+
+	<bean name="/panel/eventsInRoomReport"
+		class="com.bitzware.exm.action.panel.report.EventsInRoomReportAction"
+		scope="prototype" parent="/panel/reportBase">
+	</bean>
+
+	<bean name="/panel/eventsOnFloorReport"
+		class="com.bitzware.exm.action.panel.report.EventsOnFloorReportAction"
+		scope="prototype" parent="/panel/reportBase">
+	</bean>
+
+	<bean name="/panel/visitorsRoutesReport"
+		class="com.bitzware.exm.action.panel.report.VisitorsRoutesReportAction"
+		scope="prototype" parent="/panel/reportBase">
+	</bean>
+
+	<bean name="/panel/popularStationsReport"
+		class="com.bitzware.exm.action.panel.report.PopularStationsReportAction"
+		scope="prototype" parent="/panel/reportBase">
+	</bean>
+
+	<bean name="/panel/dailyVisitsReport"
+		class="com.bitzware.exm.action.panel.report.DailyVisitsReportAction"
+		scope="prototype" parent="/panel/reportBase">
+	</bean>
+
+</beans>

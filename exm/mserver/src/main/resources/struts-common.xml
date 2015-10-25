@@ -1,0 +1,28 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<constant name="struts.custom.i18n.resources" value="global" />
+	
+    <constant name="struts.objectFactory" value="spring" />
+    <!--  org.apache.struts2.spring.StrutsSpringObjectFactory com.opensymphony.xwork2.ObjectFactory -->
+    <constant name="struts.multipart.maxSize" value="2000971520" />
+    
+    
+    <package name="panel-common" extends="tiles-default" namespace="/panel">
+    
+        <default-action-ref name="mainMenu" />
+        
+        <!--<interceptors>
+            <interceptor-stack>
+                <interceptor-ref name="fileUpload">
+                    <param name="maximumSize">20971520</param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>-->
+        
+    </package>
+    
+</struts>

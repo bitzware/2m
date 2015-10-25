@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+        
+    <bean id="configManager" class="com.bitzware.exm.service.impl.PropertiesConfigManager">
+        <constructor-arg value="classpath:/config.properties" />
+    </bean>
+
+    <bean id="processManager" class="com.bitzware.exm.service.ProcessManager">
+        <property name="serverPropertyDao" ref="serverPropertyDao" />
+    </bean>
+    
+    <bean id="eventManager" class="com.bitzware.exm.service.impl.EventManagerImpl" />
+    
+    <bean id="systemToolManager" class="com.bitzware.exm.service.SystemToolManager" />
+    
+    <bean id="schedulerFactory" class="org.quartz.impl.StdSchedulerFactory" />
+    
+    <bean id="visitorManager" class="com.bitzware.exm.service.impl.VisitorManagerImpl">
+        <property name="visitorDao" ref="visitorDao" />
+    </bean>
+    
+    <bean id="testManager" class="com.bitzware.exm.service.TestManager">
+        <property name="visitorDao" ref="visitorDao" />
+    </bean>
+    
+    <!-- Struts actions -->
+    
+</beans>

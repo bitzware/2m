@@ -1,0 +1,5 @@
+<players>
+	<player pid="sys" name="System" path="" />
+	<player pid="wmp" name="Windows Media Player" path="C:/Program Files/Windows Media Player/mplayer2.exe" parametersAfter="/fullscreen" />
+	<player pid="qtp" name="QuickTime Player" path="C:/Program Files/QuickTime/QuickTimePlayer.exe" />
+</players>

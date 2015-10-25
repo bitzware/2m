@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+       
+<tiles-definitions>
+    
+    <definition name="panel.header" template="/panel/jsp/header.jsp">
+    </definition>
+    
+    <definition name="panel.base" template="/panel/jsp/template.jsp">
+        <put-attribute name="header" value="panel.header" />
+    </definition>
+    
+    <definition name="masterpanel.base" template="/panel/jsp/masterTemplate.jsp">
+        <put-attribute name="header" value="panel.header" />
+    </definition>    
+    
+    <definition name="panel.mStationBase" extends="panel.base">
+        <put-attribute name="serverHeader" value="/panel/jsp/mStationHeader.jsp" />
+    </definition>
+    
+    <definition name="panel.masterServerBase" extends="masterpanel.base">
+        <put-attribute name="serverHeader" value="/panel/jsp/masterServerHeader.jsp" />
+    </definition>
+    
+    <definition name="panel.mainMenu" extends="panel.mStationBase">
+        <put-attribute name="menu" value="/panel/jsp/mainMenu.jsp" />        
+        <put-attribute name="body" value="" />        
+    </definition>
+    
+    <definition name="panel.masterMainMenu" extends="panel.masterServerBase">
+        <put-attribute name="body" value="/panel/jsp/masterMainMenu.jsp" />        
+    </definition>
+   
+    
+    <definition name="panel.masterConfig" extends="panel.masterServerBase">
+        <put-attribute name="body" value="/panel/jsp/masterConfig.jsp" />        
+    </definition>
+    
+    
+    <definition name="panel.unconfiguredStations" extends="panel.masterServerBase">
+        <put-attribute name="body" value="/panel/jsp/unconfiguredStations.jsp" />        
+    </definition>
+    
+     <definition name="panel.crestronDevices" extends="panel.masterServerBase">
+        <put-attribute name="body" value="/panel/jsp/crestronDevices.jsp" />        
+    </definition>
+    
+    <definition name="panel.rooms" extends="panel.masterServerBase">
+        <put-attribute name="body" value="/panel/jsp/rooms.jsp" />        
+    </definition>
+	
+	
+	  <definition name="masterpanel.base.mobile" template="/panel/jsp/mobileMasterTemplate.jsp">
+        <put-attribute name="header" value="panel.header" />
+    </definition>    
+     
+	<definition name="panel.mrooms" extends="masterpanel.base.mobile">
+        <put-attribute name="body" value="/panel/jsp/mrooms.jsp" />        
+    </definition>
+    
+    
+    <definition name="panel.roomsConfig" extends="panel.masterServerBase">
+        <put-attribute name="body" value="/panel/jsp/roomsConfig.jsp" />        
+    </definition>
+    
+    <definition name="panel.reports" extends="panel.masterServerBase">
+        <put-attribute name="body" value="/panel/jsp/reports.jsp" />        
+    </definition>
+    
+    <definition name="panel.displayReports" extends="panel.masterServerBase">
+        <put-attribute name="body" value="/panel/jsp/displayReports.jsp" />        
+    </definition>
+    
+    <definition name="panel.reportNotFound" extends="panel.masterServerBase">
+        <put-attribute name="body" value="/panel/jsp/reportNotFound.jsp" />        
+    </definition>
+    
+     <definition name="reports.station" template="/panel/jsp/report/reportTemplate.jsp">
+                <put-attribute name="reportParams" value="/panel/jsp/report/eventsOnStationReport.jsp" />
+            </definition>
+    
+    <definition name="panel.eventsOnStationReport" extends="panel.masterServerBase">
+        <put-attribute name="body" value="reports.station" />
+    </definition>
+    
+     <definition name="reports.room" template="/panel/jsp/report/reportTemplate.jsp">
+                <put-attribute name="reportParams" value="/panel/jsp/report/eventsInRoomReport.jsp" />
+            </definition>
+    
+    <definition name="panel.eventsInRoomReport" extends="panel.masterServerBase">
+        <put-attribute name="body" value="reports.room" />        
+    </definition>
+    
+    <definition name="reports.floor" template="/panel/jsp/report/reportTemplate.jsp">
+                <put-attribute name="reportParams" value="/panel/jsp/report/eventsOnFloorReport.jsp" />
+            </definition>
+    
+    <definition name="panel.eventsOnFloorReport" extends="panel.masterServerBase">
+        <put-attribute name="body" value="reports.floor" />
+    </definition>
+    
+    <definition name="reports.visitorRoutes" template="/panel/jsp/report/reportTemplate.jsp">
+                <put-attribute name="reportParams" value="/panel/jsp/report/visitorsRoutesReport.jsp" />
+            </definition>
+    
+    <definition name="panel.visitorsRoutesReport" extends="panel.masterServerBase">
+        <put-attribute name="body" value="reports.visitorRoutes"/>
+    </definition>
+    
+    <definition name="reports.popularStations" template="/panel/jsp/report/reportTemplate.jsp">
+                <put-attribute name="reportParams" value="/panel/jsp/report/popularStationsReport.jsp" />
+            </definition>
+    
+    <definition name="panel.popularStationsReport" extends="panel.masterServerBase">
+        <put-attribute name="body" value="reports.popularStations">
+            
+        </put-attribute>        
+    </definition>
+    
+     <definition name="reports.dailyVisits" template="/panel/jsp/report/reportTemplate.jsp">
+                <put-attribute name="reportParams" value="/panel/jsp/report/dailyVisitsReport.jsp" />
+            </definition>
+            
+    <definition name="panel.dailyVisitsReport" extends="panel.masterServerBase">
+        <put-attribute name="body" value="reports.dailyVisits" />
+    </definition>
+    
+    <definition name="panel.error404" extends="panel.mStationBase">
+        <put-attribute name="body" value="/panel/jsp/error/error404.jsp" />        
+    </definition>
+    
+</tiles-definitions>

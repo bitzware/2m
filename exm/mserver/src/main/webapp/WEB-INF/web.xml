@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+"http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app version="2.5">
+
+    <display-name>Master Server</display-name>
+
+    
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext*.xml</param-value>
+    </context-param>
+    
+    <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+    </filter>
+
+
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/panel/*</url-pattern>
+    </filter-mapping>
+    <listener>
+        <listener-class>org.apache.struts2.tiles.StrutsTilesListener</listener-class>
+    </listener>
+    
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    
+    <listener>
+        <listener-class>com.bitzware.exm.listener.ServiceFactoryListener</listener-class>
+    </listener>
+    
+    <listener>
+        <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+    </listener>
+    
+   
+    
+    
+    <servlet>
+        <servlet-name>WSServlet</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>EventServlet</servlet-name>
+        <servlet-class>com.bitzware.exm.servlet.EventServlet</servlet-class>
+        <init-param>
+            <param-name>heartbeat</param-name>
+            <param-value>5000</param-value>
+        </init-param>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>MasterGetPresentationServlet</servlet-name>
+        <servlet-class>com.bitzware.exm.servlet.MasterGetPresentationServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>EventsServlet</servlet-name>
+        <servlet-class>com.bitzware.exm.servlet.test.EventsServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>VisitorsServlet</servlet-name>
+        <servlet-class>com.bitzware.exm.servlet.test.VisitorsServlet</servlet-class>
+    </servlet>
+    
+    <!-- This servler redirects requests from /heartbeatWsdl to /heartbeat?wsdl. The
+         web service client requires access to this WSDL without authentication. -->
+    <servlet>
+        <servlet-name>RedirectServlet</servlet-name>
+        <servlet-class>com.bitzware.exm.servlet.RedirectServlet</servlet-class>
+        <init-param>
+            <param-name>resource</param-name>
+            <param-value>/masterServer?wsdl</param-value>
+        </init-param>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>tiles</servlet-name>
+        <servlet-class>org.apache.tiles.web.startup.TilesServlet</servlet-class>
+        <init-param>
+            <param-name>
+                org.apache.tiles.definition.DefinitionsFactory.DEFINITIONS_CONFIG
+            </param-name>
+            <param-value>
+                /WEB-INF/tiles.xml
+            </param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    
+    <context-param>
+    <param-name>tilesDefinitions</param-name>
+    <param-value>/WEB-INF/tiles.xml</param-value>
+</context-param>
+
+    <servlet-mapping>
+        <servlet-name>WSServlet</servlet-name>
+        <url-pattern>/eventDispatcher</url-pattern>
+    </servlet-mapping>    
+    
+    <servlet-mapping>
+        <servlet-name>WSServlet</servlet-name>
+        <url-pattern>/masterServer</url-pattern>
+    </servlet-mapping>    
+    
+    <servlet-mapping>
+        <servlet-name>WSServlet</servlet-name>
+        <url-pattern>/masterTest</url-pattern>
+    </servlet-mapping>
+    
+     <servlet-mapping>
+        <servlet-name>WSServlet</servlet-name>
+        <url-pattern>/masterServerControl</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>WSServlet</servlet-name>
+        <url-pattern>/masterVisitorProfile</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet-mapping>
+        <servlet-name>RedirectServlet</servlet-name>
+        <url-pattern>/masterServerWsdl</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet-mapping>
+        <servlet-name>MasterGetPresentationServlet</servlet-name>
+        <url-pattern>/masterGetPresentation</url-pattern>
+    </servlet-mapping>
+
+    
+    <servlet-mapping>
+        <servlet-name>EventsServlet</servlet-name>
+        <url-pattern>/test/events</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>VisitorsServlet</servlet-name>
+        <url-pattern>/test/visitors</url-pattern>
+    </servlet-mapping>
+    
+    <error-page>
+    	<error-code>400</error-code>
+    	<location>/panel/jsp/error/error.jsp</location>
+    </error-page>
+    
+    <error-page>
+    	<error-code>401</error-code>
+    	<location>/panel/jsp/error/error.jsp</location>
+    </error-page>
+    
+    <error-page>
+    	<error-code>404</error-code>
+    	<location>/panel/jsp/error/error.jsp</location>
+    </error-page>
+    
+    <error-page>
+    	<error-code>500</error-code>
+    	<location>/panel/jsp/error/error.jsp</location>
+    </error-page>
+    
+</web-app>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints version="2.0" xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime">
+  <endpoint implementation="com.bitzware.exm.ws.MasterServer" name="MasterServer" url-pattern="/masterServer"/>
+  <endpoint implementation="com.bitzware.exm.ws.MasterTest" name="MasterTest" url-pattern="/masterTest"/>
+  <endpoint implementation="com.bitzware.exm.ws.MasterVisitorProfile" name="MasterVisitorProfile" url-pattern="/masterVisitorProfile"/>
+  <endpoint implementation="com.bitzware.exm.ws.MasterServerControl" name="MasterServerControl" url-pattern="/masterServerControl"/>
+  
+</endpoints>

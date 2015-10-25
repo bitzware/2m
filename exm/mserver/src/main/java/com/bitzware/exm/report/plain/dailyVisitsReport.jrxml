@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jasperReport 
+        xmlns="http://jasperreports.sourceforge.net/jasperreports"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+        name="MostPopularStations"
+        pageWidth="595" 
+        pageHeight="842" 
+        columnWidth="270" 
+        columnSpacing="15" 
+        leftMargin="20" 
+        rightMargin="20" 
+        topMargin="50" 
+        bottomMargin="50"
+        whenNoDataType="AllSectionsNoDetail"
+        isTitleNewPage="false"
+        isSummaryNewPage="false"
+        isIgnorePagination="true"
+        columnCount="1">
+        
+    <import value="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+    
+    <template class="java.io.InputStream">
+        $P{styleTemplateInput}
+    </template>
+    
+    <parameter name="styleTemplateInput" class="java.io.InputStream" />
+    <parameter name="timeFormat" class="com.bitzware.exm.util.TimeFormatter" />
+    <parameter name="textSource" class="com.bitzware.exm.util.TextSource" />
+    <parameter name="from" class="java.util.Date" />
+    <parameter name="to" class="java.util.Date" />
+    <parameter name="chart" class="net.sf.jasperreports.engine.JRRenderable" />
+
+    <field name="year" class="java.lang.Integer" />
+    <field name="month" class="java.lang.Integer" />
+    <field name="day" class="java.lang.Integer" />
+    <field name="visitsAmount" class="java.lang.Long" />
+    
+    <detail>
+        <band height="15">
+            <textField>
+                <reportElement x="0" y="0" width="120" height="15" style="Normal"/>
+                <textElement textAlignment="Left"/>
+                <textFieldExpression class="java.lang.Integer">
+                    $F{year}
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="120" y="0" width="120" height="15" style="Normal"/>
+                <textElement textAlignment="Left"/>
+                <textFieldExpression class="java.lang.Integer">
+                    $F{month}
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="240" y="0" width="120" height="15" style="Normal"/>
+                <textElement textAlignment="Left"/>
+                <textFieldExpression class="java.lang.Integer">
+                    $F{day}
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="360" y="0" width="120" height="15" style="Normal"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression class="java.lang.Long">
+                    $F{visitsAmount}
+                </textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    
+</jasperReport>

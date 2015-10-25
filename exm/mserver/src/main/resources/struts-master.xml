@@ -1,0 +1,97 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    
+    <package name="panel-master" extends="tiles-default" namespace="/panel">
+    
+        <action name="mainMenu" class="/panel/masterMainMenu">
+        	<interceptor-ref name="i18n"/>
+            <result name="success" type="tiles">panel.masterMainMenu</result>
+        </action>
+    
+        <action name="masterConfig" class="/panel/masterConfig">
+        <interceptor-ref name="i18n"/>
+            <result name="success" type="tiles">panel.masterConfig</result>
+        </action>
+    
+        <action name="unconfiguredStations" class="/panel/unconfiguredStations">
+        <interceptor-ref name="i18n"/>
+            <result name="success" type="tiles">panel.unconfiguredStations</result>
+        </action>
+        
+        <action name="crestronDevices" class="/panel/crestronDevices">
+        <interceptor-ref name="i18n"/>
+            <result name="success" type="tiles">panel.crestronDevices</result>
+        </action>
+    
+        <action name="rooms" class="/panel/rooms">
+     	   <interceptor-ref name="i18n"/>
+            <result name="success" type="tiles">panel.rooms</result>
+        </action>
+		
+		<action name="mrooms" class="/panel/mrooms">
+		<interceptor-ref name="i18n"/>
+            <result name="success" type="tiles">panel.mrooms</result>
+        </action>
+    
+        <action name="roomsConfig" class="/panel/roomsConfig">
+        <interceptor-ref name="i18n"/>
+            <result name="success" type="tiles">panel.roomsConfig</result>
+        </action>
+    
+        <action name="isReportReady" class="/panel/isReportReady">
+        <interceptor-ref name="i18n"/>
+            <result name="success" type="stream">
+                <param name="contentType">text/plain</param>
+                <param name="inputName">value</param>
+            </result>
+        </action>
+
+        <action name="getReport" class="/panel/getReport">
+        <interceptor-ref name="i18n"/>
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">reportStream</param>
+                <param name="contentDisposition">${contentDisposition}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="error" type="tiles">panel.reportNotFound</result>
+        </action>
+    
+        <action name="reports" class="/panel/reports">
+            <result name="success" type="tiles">panel.reports</result>
+        </action>
+    
+        <action name="displayReports" class="/panel/displayReports">
+            <result name="success" type="tiles">panel.displayReports</result>
+        </action>
+        
+        <action name="eventsOnStationReport" class="/panel/eventsOnStationReport">
+            <result name="success" type="tiles">panel.eventsOnStationReport</result>
+        </action>
+        
+        <action name="eventsInRoomReport" class="/panel/eventsInRoomReport">
+            <result name="success" type="tiles">panel.eventsInRoomReport</result>
+        </action>
+        
+        <action name="eventsOnFloorReport" class="/panel/eventsOnFloorReport">
+            <result name="success" type="tiles">panel.eventsOnFloorReport</result>
+        </action>
+        
+        <action name="visitorsRoutesReport" class="/panel/visitorsRoutesReport">
+            <result name="success" type="tiles">panel.visitorsRoutesReport</result>
+        </action>
+        
+        <action name="popularStationsReport" class="/panel/popularStationsReport">
+            <result name="success" type="tiles">panel.popularStationsReport</result>
+        </action>
+        
+        <action name="dailyVisitsReport" class="/panel/dailyVisitsReport">
+            <result name="success" type="tiles">panel.dailyVisitsReport</result>
+        </action>
+        
+    </package>
+    
+</struts>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jasperReport 
+        xmlns="http://jasperreports.sourceforge.net/jasperreports"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+        name="EventsInRoomReport"
+        pageWidth="700" 
+        pageHeight="842" 
+        columnWidth="270" 
+        columnSpacing="15" 
+        leftMargin="20" 
+        rightMargin="20" 
+        topMargin="50" 
+        bottomMargin="50"
+        whenNoDataType="AllSectionsNoDetail"
+        isTitleNewPage="false"
+        isSummaryNewPage="false"
+        isIgnorePagination="true"
+        columnCount="1">
+        
+    <import value="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+    
+    <style name="Base" fontName="Arial" pdfEncoding="UTF-8" />    
+    <style name="Normal" style="Base" isDefault="true" fontSize="10" />
+    <style name="Small" style="Base" fontSize="8" />
+    <style name="Italic" style="Normal" isItalic="true" />
+    <style name="Bold" style="Normal" isBold="true" />
+    <style name="DocHeaderName" style="Base" fontSize="12" isBold="true" />
+    <style name="DocHeaderValue" style="Base" fontSize="12" />
+    <style name="DocTitle" style="Base" fontSize="14" isBold="true" />
+    <style name="Header" style="Base" fontSize="10" isBold="true" />
+    
+    <field name="id" class="java.lang.Long" />
+    <field name="version" class="java.lang.Integer" />
+    <field name="data" class="java.lang.String" />
+    <field name="timestamp" class="java.util.Date" />
+    <field name="visitor" class="com.bitzware.exm.visitordb.model.Visitor" />
+    <field name="station" class="com.bitzware.exm.visitordb.model.Station" />
+    <field name="eventType" class="com.bitzware.exm.visitordb.model.EventType" />
+    
+    <columnHeader>
+        <band height="25">
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="0" y="0" width="100" height="25" style="Header"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    "Id"
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="100" y="0" width="100" height="25" style="Header"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    "Timestamp"
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="200" y="0" width="100" height="25" style="Header"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    "Event type"
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="300" y="0" width="100" height="25" style="Header"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    "Version"
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="400" y="0" width="100" height="25" style="Header"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    "Data"
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="500" y="0" width="100" height="25" style="Header"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    "Station id"
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="600" y="0" width="100" height="25" style="Header"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    "Visitor id"
+                </textFieldExpression>
+            </textField>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="30">
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="0" y="0" width="100" height="30" style="Normal"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression class="java.lang.Long">
+                    $F{id}
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="100" y="0" width="100" height="30" style="Normal"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression class="java.util.Date">
+                    $F{timestamp}
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="200" y="0" width="100" height="30" style="Normal"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $F{eventType}.toString()
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="300" y="0" width="100" height="30" style="Normal"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression class="java.lang.Integer">
+                    $F{version}
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="400" y="0" width="100" height="30" style="Normal"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $F{data}
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="500" y="0" width="100" height="30" style="Normal"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression class="java.lang.Long">
+                    $F{station}.getId()
+                </textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Opaque" x="600" y="0" width="100" height="30" style="Normal"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression class="java.lang.Long">
+                    $F{visitor}.getId()
+                </textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    
+</jasperReport>

@@ -1,0 +1,523 @@
+* {
+	font-family: "Arial";
+}
+
+.space {
+	clear: both;
+	height: 10px;
+	width="100px";
+}
+
+.ui-datepicker {
+}
+
+.ui-datepicker-header {
+}
+
+.ui-datepicker-prev {
+}
+
+.ui-datepicker-next {
+}
+
+.ui-datepicker-title {
+}
+
+.ui-datepicker-month {
+}
+
+.ui-datepicker-year {
+}
+
+.ui-datepicker-calendar {
+}
+
+.ui-datepicker-week-end {
+}
+
+.ui-datepicker-other-month {
+}
+
+.ui-datepicker-current-day {
+}
+
+.ui-datepicker-today {
+}
+
+.header {
+    font-size: x-large;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.body {
+	width: 100%;
+}
+
+.serverHeader {
+    
+    color: white;
+    background-color: #777777;
+}
+
+.infoHeader {
+    text-align: center;
+    color: white;
+}
+.pageHeader {
+    font-weight: bold;
+    padding: 15px;
+    color: white;
+    margin: 5px 5px 5px 5px;
+}
+
+.pageBody {
+	width: 100%;
+	text-align: center;
+	overflow-y: hidden;
+}
+
+.menu {
+	margin: 10px;
+}
+
+.menuGroup {
+	width: 23%;
+	float: left; 	
+}
+
+.menuGroupHeader {
+	width: 100%;
+	cursor: pointer;
+	color: white;
+	font-weight: bold;
+	padding: 10px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: white;
+}
+
+.menuGroupBody {
+	display: none;
+	z-index:999; 
+	position:absolute;
+	position: relative !important!;
+}
+
+img {
+border: none;
+}
+
+.mainMenuEntry {
+   width: 30%;
+   padding: 10px; 
+   float: left; 
+    text-align: center;   
+}
+
+.menuEntry {
+   padding: 10px; 
+   
+}
+.subMenuEntry {
+
+   
+}
+.menuSpace {
+	height: 10px;
+}
+
+.link {
+	color: blue;
+	cursor: pointer;
+	text-decoration: underline;
+	border: 0px;
+}
+
+.mainmenubutton {
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    width: 250px;
+    text-align: left;
+}
+.button {
+    background-image: url('/mserver/panel/img/button.jpg');
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    width: 250px;
+    text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+    padding: 5px;
+margin-left: 10px;
+margin-right: 10px;
+  
+}
+
+.menuButton {
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+    padding: 5px;
+margin-left: 10px;
+margin-right: 10px;
+  
+}.
+.button:hover {
+	border-color: #5555ff;
+}
+
+.button:active {
+	border-color: #ff5555;
+}
+
+.formTable {
+	margin: 10px;
+}
+
+.formTable td {
+	padding: 5px;
+}
+
+.formFieldError {
+	color: red;
+	font-weight: bold;
+}
+
+.formWithoutBorder {
+	margin: 0px;
+	border: 0px;
+}
+
+.devTypeConfig, .intConfig {
+	margin: 10px;
+}
+
+.devTypeConfigHead {
+    color: #FFFFFF;
+    font-weight: bold;
+    margin: 0px 0px 5px;
+    padding: 5px;
+}
+
+.configEntries {
+}
+
+.configEntry {
+	margin: 10px;
+	padding: 10px;
+}
+
+.configEntry > span {
+	margin: 5px;
+	padding: 5px;
+}
+
+.configEntry > td {
+	padding: 10px;
+}
+
+.configEntry textArea {
+	
+}
+
+.configAdd {
+	margin: 10px;
+}
+
+.fileUpload {
+	margin: 0px 4px 10px 4px;
+}
+
+.fileUploadForm {
+	margin: 10px;
+}
+
+.workTime {
+	margin-top: 15px;
+}
+
+.openTime {
+	margin: 10px;
+	padding: 10px;
+	font-weight: bold;
+}
+
+.closeTime {
+	margin: 10px;
+	padding: 10px;
+	font-weight: bold;
+}
+
+.success {
+	font-size: large;
+	font-weight: bold;
+	color: green;
+	padding: 20px;
+}
+
+.error, .reportGenFailed {
+	font-size: large;
+    font-weight: bold;
+    color: red;
+    padding: 20px;
+}
+
+.warning {
+	padding: 5px;
+	color: red;
+}
+
+.buttonBox {
+	padding: 5px;
+	margin-top: 5px;
+}
+
+.toolBox {
+	padding: 5px;
+	margin-top: 5px;
+}
+
+.buttonRow {
+	padding: 10px;
+}
+
+.display {
+	padding: 10px;
+}
+
+.resultList {
+	padding: 10px;
+}
+	
+.resultList td {
+    padding: 5px;
+}
+
+tr.stations:nth-child(2n+1), tr.odd { background-color:#dddddd; }
+tr.stations:nth-child(2n), tr.even { background-color:#eeeeee; }
+
+
+.resultHeaderRow, .configHeaderRow {
+    background-color: #aaaaaa;
+    font-weight: bold;
+}
+
+.resultSectionRow {
+	background-color: #bbbbbb;
+	font-weight: bold;
+	text-align: center;
+}
+
+.pagerControl {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #eeeeee;
+}
+
+.pagerControl td {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.pagerControlSep {
+	text-align: center;
+	width: 200;
+}
+
+.roomsTurnOnCell {
+	text-align: center;
+}
+
+.roomsTurnOffCell {
+	text-align: center;
+}
+
+.innerFrame {
+	display: none;
+	position: absolute;
+	left: 5%;
+	right: 5%;
+	top: 5%;
+	bottom: 5%;
+	width: 90%;
+	height: 90%;
+	background-color: black;
+}
+
+.innerFrameContainer {
+}
+
+.innerFrameCloseButton {
+	cursor: pointer;
+    background-color: #aaaaaa;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    height: 8%;
+    width: 100%;
+}
+
+.innerFrameCloseButtonText {
+	position: relative;
+	top: 30%;
+}
+
+.innerFramePageContainer {
+	position: absolute;
+    top: 8%;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 92%;
+}
+
+.innerFramePage {
+	position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.stationActive {
+	color: green;
+}
+
+.stationInactive {
+	color: red;
+}
+
+.reportGenProgress, .reportGenSuccess {
+    font-size: large;
+    font-weight: bold;
+    padding: 20px;
+}
+
+.collapsed {
+	border-collapse: collapse;
+}
+
+.presOn {
+	color: green;
+	font-weight: bold;
+	margin-left: 10px;
+}
+
+.presOff {
+	color: red;
+	font-weight: bold;
+	margin-left: 10px;
+}
+
+.actionList {
+	width: 100%;
+}
+
+.actionListRow {
+	width: 100%;
+}
+
+.actionListSelect {
+	width: 40%;
+}
+
+.actionRow {
+	width: 100%;
+}
+
+.actionLabel {
+	width: 20%;
+}
+
+.actionField {
+	width: 80%;
+}
+
+.actionField > input, .actionField > textArea {
+	width: 100%;
+}
+
+.actionDefFormElement {
+	width: 100%;
+}
+
+.code {
+	font-family: monospace;
+	width: 100%;
+}
+
+.devConfigAdamDetect {
+	border-left-style: dashed;
+	border-top-style: dashed;
+	border-bottom-style: dashed;
+	border-width: 1px;
+}
+
+.devConfigAdamModelField {
+	border-top-style: dashed;
+	border-bottom-style: dashed;
+	border-width: 1px;
+}
+
+.devConfigAdamAddressField {
+	border-top-style: dashed;
+	border-bottom-style: dashed;
+	border-right-style: dashed;
+	border-width: 1px;
+}
+
+.fileManagerFileName {
+	width: 200px;
+}
+
+.fileManagerRemove {
+}
+
+.fileManagerRename {
+}
+
+.fileManagerExtract {
+}
+
+.fileManagerRowHighlight {
+	background-color: #aaaaaa;
+}
+
+.fileManagerPresentationFileLabel {
+	margin: 10px 10px 10px 10px;
+}
+
+.fileManagerPresentationFile {
+	margin: 10px 10px 10px 10px;
+	font-weight: bold;
+}
+
+.fileManagerCurrentDir {
+	margin: 10px 10px 10px 10px;
+	font-weight: bold;
+}
+
+.fileManagerPlayerTable {
+	border-collapse: collapse;
+	margin: 10px 10px 10px 10px;
+}
+
+.fileManagerPlayerSelect {
+	margin: 10px;
+}

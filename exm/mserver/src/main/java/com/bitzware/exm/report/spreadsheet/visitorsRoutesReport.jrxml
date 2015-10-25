@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jasperReport 
+        xmlns="http://jasperreports.sourceforge.net/jasperreports"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+        name="VisitorsRouteReport"
+        pageWidth="595" 
+        pageHeight="842" 
+        columnWidth="270" 
+        columnSpacing="15" 
+        leftMargin="20" 
+        rightMargin="20" 
+        topMargin="50" 
+        bottomMargin="50"
+        whenNoDataType="BlankPage"
+        isTitleNewPage="false"
+        isSummaryNewPage="false"
+        isIgnorePagination="true"
+        columnCount="1">
+        
+    <import value="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+    
+    <template class="java.io.InputStream">
+        $P{styleTemplateInput}
+    </template>
+    
+    <parameter name="styleTemplateInput" class="java.io.InputStream" />
+    <parameter name="timeFormat" class="com.bitzware.exm.util.TimeFormatter" />
+    <parameter name="textSource" class="com.bitzware.exm.util.TextSource" />
+    <parameter name="date" class="java.util.Date" />
+    <parameter name="eventType" class="java.lang.String" />
+    
+    <field name="station" class="com.bitzware.exm.visitordb.model.Station" />
+    <field name="timestamp" class="java.util.Date" />
+    <field name="visitor" class="com.bitzware.exm.visitordb.model.Visitor" />
+    
+    <group name="visitorGroup" minHeightToStartNewPage="40">
+        <groupExpression>
+            $F{visitor}.getId()
+        </groupExpression>
+        <groupHeader>
+            <band height="20">
+                <textField isBlankWhenNull="true">
+                    <reportElement x="0" y="0" width="100" height="20" style="Bold" />
+                    <textElement textAlignment="Left" verticalAlignment="Middle" />
+                    <textFieldExpression class="java.lang.Long">
+                        $F{visitor}.getId()
+                    </textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="100" y="0" width="285" height="20" style="Bold" />
+                    <textElement textAlignment="Left" verticalAlignment="Middle" />
+                    <textFieldExpression class="java.lang.String">
+                        $F{visitor}.getName()
+                    </textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+    </group>
+    
+    <group name="roomGroup">
+        <groupExpression>
+            $F{station}.getRoom().getId()
+        </groupExpression>
+        <groupHeader>
+            <band height="1">
+                <rectangle>
+                    <reportElement x="0" y="0" width="350" height="1" forecolor="#cccccc" />
+                    <graphicElement />
+                </rectangle>
+            </band>
+        </groupHeader>
+    </group>
+    
+    <group name="stationGroup">
+        <groupExpression>
+            $F{station}.getId()
+        </groupExpression>
+        <groupHeader>
+            <band height="15">
+                <textField isBlankWhenNull="true">
+                    <reportElement x="0" y="0" width="200" height="15" style="Normal"/>
+                    <textElement textAlignment="Left"/>
+                    <textFieldExpression class="java.lang.String">
+                        $F{station}.getName()
+                    </textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="200" y="0" width="150" height="15" style="Normal"/>
+                    <textElement textAlignment="Left"/>
+                    <textFieldExpression class="java.lang.String">
+                        $F{station}.getRoom().getName()
+                    </textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="350" y="0" width="100" height="15" style="Normal"/>
+                    <textElement textAlignment="Left"/>
+                    <textFieldExpression class="java.lang.String">
+                        $P{timeFormat}.formatTimestamp($F{timestamp})
+                    </textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+    </group>
+    
+    <title>
+        <band height="116">
+            <textField>
+                <reportElement x="400" y="0" width="155" height="16" style="Normal"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" />
+                <textFieldExpression>
+                    $P{timeFormat}.formatTimestamp(new java.util.Date())
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="16" width="350" height="20" style="DocTitle"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{textSource}.getText("text.report.visitorsroutes.title")
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="41" width="150" height="16" style="DocHeaderName"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{textSource}.getText("text.report.visitorsroutes.date")
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="160" y="41" width="405" height="16" style="DocHeaderValue"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{timeFormat}.formatDate($P{date})
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="57" width="150" height="16" style="DocHeaderName"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{textSource}.getText("text.report.eventsonstation.eventtype")
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="160" y="57" width="405" height="16" style="DocHeaderValue"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" />
+                <textFieldExpression>
+                    $P{eventType}
+                </textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement x="0" y="96" width="555" height="1" />
+                <graphicElement />
+            </rectangle>
+        </band>
+    </title>
+    
+    <columnHeader>
+        <band height="25">
+            <textField>
+                <reportElement x="0" y="0" width="200" height="25" style="Header"/>
+                <textElement textAlignment="Left"/>
+                <textFieldExpression class="java.lang.String">
+                    $P{textSource}.getText("text.station.title")
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="200" y="0" width="150" height="25" style="Header"/>
+                <textElement textAlignment="Left"/>
+                <textFieldExpression class="java.lang.String">
+                    $P{textSource}.getText("text.room.title")
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="350" y="0" width="100" height="25" style="Header"/>
+                <textElement textAlignment="Left"/>
+                <textFieldExpression class="java.lang.String">
+                    $P{textSource}.getText("text.timestamp.title")
+                </textFieldExpression>
+            </textField>
+        </band>
+    </columnHeader>
+    
+    <detail>    
+    </detail>
+    
+</jasperReport>

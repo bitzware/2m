@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+    
+    <tx:annotation-driven/>
+    
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:/test/jdbc.properties"/>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${hibernate.connection.driver_class}"/>
+        <property name="url" value="${hibernate.connection.url}"/>
+        <property name="username" value="${hibernate.connection.username}"/>
+        <property name="password" value="${hibernate.connection.password}"/>
+    </bean>
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        
+        <property name="annotatedClasses">
+            <list>
+                <value>com.bitzware.exm.visitordb.model.Event</value>
+                <value>com.bitzware.exm.visitordb.model.EventType</value>
+                <!-- value>com.bitzware.exm.visitordb.model.Museum</value-->
+                <value>com.bitzware.exm.visitordb.model.ServerProperty</value>
+                <value>com.bitzware.exm.visitordb.model.Room</value>
+                <value>com.bitzware.exm.visitordb.model.Station</value>
+                <value>com.bitzware.exm.visitordb.model.Visitor</value>
+                
+                <value>com.bitzware.exm.visitordb.model.config.Device</value>
+                <!-- value>com.bitzware.exm.visitordb.model.config.Interaction</value -->
+            </list>
+        </property>
+       
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.generate_statistics">${hibernate.generate_statistics}</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+                <!--<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>-->
+            </props>
+        </property>
+    </bean>
+
+    <!-- DAO classes -->
+    
+    <!-- bean name="reportDao" class="com.bitzware.exm.dao.impl.ReportDaoImpl">
+        <property name="idGenerator">
+            <bean class="com.bitzware.exm.util.UuidGenerator" />
+        </property>
+        
+        <property name="rootDir" value="c:/projekty/temp/exm/reports2" />
+    </bean -->
+    
+    <bean name="reportGeneratorDao" class="com.bitzware.exm.dao.impl.ReportGeneratorDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean name="stationDao" class="com.bitzware.exm.dao.impl.StationDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean name="roomDao" class="com.bitzware.exm.dao.impl.RoomDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean name="testDao" class="test.TestDao">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <!--  bean id="reportManager" class="com.bitzware.exm.service.impl.ReportManagerImpl">
+        <property name="reportDao" ref="reportDao" />
+        <property name="reportGeneratorDao" ref="reportGeneratorDao" />
+        <property name="roomDao" ref="roomDao" />
+        <property name="stationDao" ref="stationDao" />
+    </bean -->
+    
+</beans>
